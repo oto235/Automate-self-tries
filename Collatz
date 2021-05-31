@@ -1,0 +1,33 @@
+def collatz(number):
+    if number == 1:
+        print(number)
+
+    while number > 1:
+        if number % 2 == 0:
+            number = number // 2
+            print(number)
+        elif number % 2 == 1:
+            number = 3 * number + 1
+            print(number)
+
+
+
+print('Please enter any positive integer.') #what the user sees
+number = input()
+import sys
+
+while True:
+    try:
+        number = int(number)
+        if number <= 0:
+            print('The integer must be bigger than zero. Try again.')
+            number = input()
+            continue
+        print('Here is the Collatz sequence based on ' + str(number) + '.')
+        collatz(number)
+        break
+
+    except ValueError:
+        print('You must enter an INTEGER greater than zero.')
+        number = input()
+
