@@ -1,0 +1,15 @@
+# Practice Project "Comma Code" page 107
+# Make string from entire list, add commas and spaces, add "and" 
+# Be able to pass a list to a function and have it return a string
+#   of those values.  It must work for the empty list, too.
+
+def stringThisList(List):
+    if len(List) == 0:
+        print('Your list contains nothing.')
+
+    else:
+        newPhrase = ('')
+        for i in range(len(List)-1):
+            newPhrase = newPhrase + str(List[i]) + ', '
+        newPhrase = newPhrase + 'and ' + str(List[-1])
+        return newPhrase
