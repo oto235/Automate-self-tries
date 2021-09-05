@@ -1,0 +1,81 @@
+# This program was written to have a dictionary passed to it and checks
+# to see if it has valid chess board squares and pieces.
+
+# Acceptable entries are:
+# 64 chess squares: 1a to 1h, 1a to 8a, 1h to 8h, 8a to 8h
+# 16 white pieces:wking, wqueen, wbishop (2), wrook (2), wknight (2), wpawn (8)
+# 16 black pieces:bking, bqueen, bbishop (2), brook (2), bknight (2), bpawn (8)
+
+blankChessBoard = {'squares':
+                   {'1a': ' ', '1b': ' ', '1c': ' ', '1d': ' ', 
+                    '1e': ' ', '1f': ' ', '1g': ' ', '1h': ' ',
+                    '2a': ' ', '2b': ' ', '2c': ' ', '2d': ' ', 
+                    '2e': ' ', '2f': ' ', '2g': ' ', '2h': ' ',
+                    '3a': ' ', '3b': ' ', '3c': ' ', '3d': ' ', 
+                    '3e': ' ', '3f': ' ', '3g': ' ', '3h': ' ',
+                    '4a': ' ', '4b': ' ', '4c': ' ', '4d': ' ', 
+                    '4e': ' ', '4f': ' ', '4g': ' ', '4h': ' ',
+                    '5a': ' ', '5b': ' ', '5c': ' ', '5d': ' ', 
+                    '5e': ' ', '5f': ' ', '5g': ' ', '5h': ' ',
+                    '6a': ' ', '6b': ' ', '6c': ' ', '6d': ' ', 
+                    '6e': ' ', '6f': ' ', '6g': ' ', '6h': ' ',
+                    '7a': ' ', '7b': ' ', '7c': ' ', '7d': ' ', 
+                    '7e': ' ', '7f': ' ', '7g': ' ', '7h': ' ',
+                    '8a': ' ', '8b': ' ', '8c': ' ', '8d': ' ', 
+                    '8e': ' ', '8f': ' ', '8g': ' ', '8h': ' '},
+                   'pieces':
+                   {'wking': 1, 'wqueen': 1, 'wbiship': 2, 'wrook': 2, 
+                    'wknight': 2, 'wpawn': 8, ' ': 64, '': 64,
+                    'bking': 1, 'bqueen': 1, 'bbishop': 2, 'brook': 2, 
+                    'bknight': 2, 'bpawn': 8}}
+
+def isValidChessBoard(chessBoard):
+    message1 = ''  # message1 refers to (in)valid board squares
+    message2 = ''  # message2 refers to (in)valid pieces
+    message3 = ''  # message3 refers to (in)valid piece count
+
+    # code for blank dictionary
+    if chessBoard == {}:
+        message1 = 'Neither chess board nor pieces detected. Please try again.'
+
+    # code to check all dictionary keys are valid 
+    for k in chessBoard:
+        if k not in blankChessBoard['squares']:
+            message1 = 'Invalid chess board square: "' + k +\
+            '". Please try again.'
+            break
+        else:
+            message1 = 'Valid chess board squares detected.'
+
+    # code to check valid pieces for each color
+    try:
+        piecesCount = {}
+        for k, v in chessBoard.items():
+            if v not in blankChessBoard['pieces']:
+                message2 = 'Invalid piece "' + v + '" detected at square "' \
+                + k + '". Please try again.'
+                break
+
+            else:
+                message2 = 'Valid pieces detected.'
+
+                # this counts the chess pieces
+                piecesCount.setdefault(v, 0)
+                piecesCount[v] += 1
+
+        for pck, pcv in piecesCount.items():  # pck = piecesCount keys
+            if pcv > blankChessBoard['pieces'][pck]:
+                message3 = 'Too many "' + pck + '". Please try again'
+                break
+            else:
+                message3 = 'Valid number of pieces detected.'
+    except AttributeError:
+        message2 = 'No pieces detected.'
+
+    print(message1)
+    if message2 != '':
+        print(message2)
+    if message3 != '':
+        print(message3)
+    if piecesCount != {}:
+        print('Pieces count = ' + str(piecesCount))
