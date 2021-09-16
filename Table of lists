@@ -1,0 +1,22 @@
+tableData = [['apples', 'oranges', 'cherries', 'banana'],
+             ['Alice', 'Bob', 'Carol', 'David'],
+             ['dogs', 'cats', 'moose', 'goose']]
+
+
+# print a table of list of lists, right justified, regardless of len
+def printTable(table):
+    # find longest str in each inner list and set column width to len
+    colWidth = [0] * len(table)
+
+    for outlist in table:
+        for inlist in outlist:
+            if len(inlist) > colWidth[table.index(outlist)]:
+                colWidth[table.index(outlist)] = len(inlist)
+  
+    # print table[0][0] print table[1][0] print table[2][0] - right justified
+    for i in range(len(table[0])):
+        for outlist in table:
+            print(outlist[i].rjust(colWidth[table.index(outlist)], ' '), end = ' ')
+        print(end = '\n')
+            
+printTable(tableData)
